@@ -54,11 +54,143 @@ function showMeetings() {
     center.innerHTML = '<h2>Meetings</h2><p>List of meetings will be displayed here.</p>';
 }
 
-function showTimesheets() {
+function showTimesheet() {
     var center = document.getElementById('center');
-    center.innerHTML = '<h2>Meetings</h2><p>Timesheet will be displayed here.</p>';
-}
+    center.innerHTML = `
+    <main class="table">
+    <section class="header">
+      <h1><b>Employee Timesheet</b></h1>
+    </section>
+    <section class="body">
+      <table>
+        <thead>
+          <tr>
+            <th>Employee Id</th>
+            <th>Task</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" id="employeeId" /></td>
+            <td><input type="text" id="task" /></td>
+            <td><input type="date" id="date" /></td>
+            <td><input type="time" id="startTime" /></td>
+            <td><input type="time" id="endTime" /></td>
+            <td>
+              <input type="radio" id="status2" name="progress" />
+              <label for="status2">In Progress</label>
 
+              <input type="radio" id="status3" name="progress" />
+              <label for="status3">Completed</label>
+            </td>
+            <td>
+              <button id="addTask" class="btn btn-success btn-sm">
+                Add Task
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+    `;
+  
+    // Initialize timesheet functionality
+    initializeTimesheet();
+  }
+
+function showMeals() {
+    var center = document.getElementById('center');
+    center.innerHTML = `
+    <section class="header">
+      <h1> <b>Create Meals</b></h1>
+    </section>
+    <button data-target="#addTaskModel" id="addBtn">Add Meal</button>
+        <section class="body">
+            <table id="mealsTable">
+                <thead>
+                    <tr>
+                        <th>Meal Type</th>
+                        <th>Protein</th>
+                        <th>Starch</th>
+                        <th>Fruit</th>
+                        <th>Drink</th>
+                        <th>Snack</th>
+                        <th>Confirm Meal Booking</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <select>
+                                <option value="" selected disabled>Select</option> <!-- First option remains enabled -->
+                                <option value="vegan">Vegan</option>
+                                <option value="vegetarian">Vegetarian</option>
+                                <option value="halal">Halal</option>
+                                <option value="kosher">Kosher</option>
+                                <option value="gluten-free">Gluten-Free</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select>
+                                <option value="" selected disabled>Select</option> <!-- First option remains enabled -->
+                                <option value="chicken">Chicken</option>
+                                <option value="beef">Beef</option>
+                                <option value="fish">Fish</option>
+                                <option value="tofu">Tofu</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select>
+                                <option value="" selected disabled>Select</option> <!-- First option remains enabled -->
+                                <option value="rice">Rice</option>
+                                <option value="pasta">Pasta</option>
+                                <option value="potatoes">Potatoes</option>
+                                <option value="quinoa">Quinoa</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select>
+                                <option value="" selected disabled>Select</option> <!-- First option remains enabled -->
+                                <option value="apple">Apple</option>
+                                <option value="banana">Banana</option>
+                                <option value="orange">Orange</option>
+                                <option value="grapes">Grapes</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select>
+                                <option value="" selected disabled>Select</option> <!-- First option remains enabled -->
+                                <option value="water">Water</option>
+                                <option value="juice">Juice</option>
+                                <option value="soda">Soda</option>
+                                <option value="tea">Tea</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select>
+                                <option value="" selected disabled>Select</option> <!-- First option remains enabled -->
+                                <option value="nuts">Nuts</option>
+                                <option value="yogurt">Yogurt</option>
+                                <option value="granola">Granola</option>
+                                <option value="corn chips">Corn Chips</option>
+                            </select>
+                        </td>
+                        <td id="mealConfirmation">In Progress...</td>
+                    </tr>
+                </tbody>
+            </table>
+    `;
+  
+    // Initialize meals functionality
+    initializeMeals();
+  }
+  
 // JavaScript code to handle adding and removing employees in the employee section
 document.addEventListener('DOMContentLoaded', function () {
     // Function to display employees in the table
@@ -118,107 +250,6 @@ document.addEventListener('DOMContentLoaded', function () {
     displayEmployees();
 });
 
-// Function to show the timesheet section
-function showTimesheet() {
-    var center = document.getElementById('center');
-    center.innerHTML = `
-      <div id="timesheetSection">
-        <h2>Timesheet</h2>
-        <form id="timesheetForm">
-          <label for="date">Date:</label>
-          <input type="date" id="date" required>
-          <label for="hoursWorked">Hours Worked:</label>
-          <input type="number" id="hoursWorked" min="0" required>
-          <button type="submit">Submit</button>
-        </form>
-        <table id="timesheetTable">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Hours Worked</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Table rows will be dynamically added here -->
-          </tbody>
-        </table>
-        <button id="generateTimesheetBtn">Generate Timesheet</button>
-      </div>
-    `;
-  
-    // Initialize timesheet functionality
-    initializeTimesheet();
-  }
-  
-  // Function to initialize timesheet functionality
-  function initializeTimesheet() {
-    const timesheetForm = document.getElementById('timesheetForm');
-    const timesheetTable = document.getElementById('timesheetTable');
-    const generateTimesheetBtn = document.getElementById('generateTimesheetBtn');
-    const timesheetData = [];
-  
-    // Function to display timesheet data in the table
-    function displayTimesheetData() {
-      timesheetTable.innerHTML = ""; // Clear existing rows
-  
-      // Iterate over the timesheet data array and add rows to the table
-      timesheetData.forEach(entry => {
-        const row = `
-          <tr>
-            <td>${entry.date}</td>
-            <td>${entry.hoursWorked}</td>
-          </tr>
-        `;
-        timesheetTable.innerHTML += row;
-      });
-    }
-  
-    // Function to handle form submission
-    timesheetForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-      const date = document.getElementById('date').value;
-      const hoursWorked = parseInt(document.getElementById('hoursWorked').value);
-  
-      // Add the timesheet entry to the timesheet data array
-      timesheetData.push({ date, hoursWorked });
-      displayTimesheetData();
-      this.reset(); // Clear form fields
-    });
-  
-    // Event listener for generating the timesheet
-    generateTimesheetBtn.addEventListener('click', function () {
-      // Prepare the timesheet data for display or export
-      // Here, you can implement logic to generate the timesheet report
-      console.log(timesheetData);
-      alert('Timesheet generated! Check console for details.');
-    });
-  }
-  
-// Function to show the meals section
-function showMeals() {
-    var center = document.getElementById('center');
-    center.innerHTML = `
-      <div id="mealsSection">
-        <h2>Meals</h2>
-        <form id="mealForm">
-          <label for="mealName">Meal Name:</label>
-          <input type="text" id="mealName" required>
-          <label for="assignedEmployee">Assigned Employee:</label>
-          <select id="assignedEmployee" required>
-            <option value="">Select Employee</option>
-            <!-- Add employee options dynamically here -->
-          </select>
-          <button type="submit">Create Meal</button>
-        </form>
-        <ul id="mealList">
-          <!-- Meal items will be dynamically added here -->
-        </ul>
-      </div>
-    `;
-  
-    // Initialize meals functionality
-    initializeMeals();
-  }
   
   // Function to initialize meals functionality
   function initializeMeals() {

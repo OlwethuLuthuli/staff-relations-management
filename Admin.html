@@ -19,9 +19,10 @@
     <li><a href="#" onclick="showMessages()">Messages</a></li>
     <li><a href="#" onclick="showMeetings()">Meetings</a></li>
     <li><a href="#" onclick="showTimesheet()">Timesheet</a></li>
-    <li><a href="#" onclick="showMeals()">Meals</a></li> <!-- Added meals section -->
+    <li><a href="#" onclick="showMeals()">Meals</a></li>
   </ul>
 </div>
+<!-- Sidebar -->
 
 
 <!-- Center portion -->
@@ -29,40 +30,10 @@
   <h1>Welcome to Admin Dashboard</h1>
 
   <!-- HTML code for the timesheet section -->
-<div id="timesheetSection">
-  <h2>Timesheet</h2>
-  <form id="timesheetForm">
-    <label for="date">Date:</label>
-    <input type="date" id="date" required>
-    <label for="hoursWorked">Hours Worked:</label>
-    <input type="number" id="hoursWorked" min="0" required>
-    <button type="submit">Submit</button>
-  </form>
-  <table id="timesheetTable">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Hours Worked</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Table rows will be dynamically added here -->
-    </tbody>
-  </table>
-  <button id="generateTimesheetBtn">Generate Timesheet</button>
-</div>
+
+
   <!-- Content will be dynamically displayed here based on user selection -->
 </div>
-
-<!-- Right portion -->
-<div class="right">
-  <h2>Important Messages</h2>
-  <!-- Important messages for the coming week will be displayed here -->
-  <h2>Meetings for the Coming Week</h2>
-  <!-- Meetings for the coming week will be displayed here -->
-</div>
-
-
 
 <script src="Admin.js"></script>
 </body>
